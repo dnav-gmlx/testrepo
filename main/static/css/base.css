@@ -19,3 +19,11 @@
 .directoryNav .container-fluid {
     justify-content:center !important;
 }
+
+body {
+    height: 100vh;
+}
+
+.mainContainer {
+    height: 80%;
+}
