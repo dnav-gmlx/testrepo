@@ -1,0 +1,21 @@
+.main-font {
+    font-family: 'Staatliches', cursive;
+    color: #1d3557 !important;
+}
+
+.directoryFont {
+    font-family: 'Staatliches', cursive;
+    color: white !important;
+}
+
+.brandNav{
+    background-color: #e63946 !important;
+}
+
+.directoryNav{
+    background-color: #1d3557 !important
+}
+
+.directoryNav .container-fluid {
+    justify-content:center !important;
+}
