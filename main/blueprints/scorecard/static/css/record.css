@@ -2,7 +2,9 @@
     border: 2px solid #00508D;
     border-radius: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
     padding-top: 1rem;
     height: 85%;
 }
@@ -15,4 +17,21 @@
 
 .btn {
     white-space: nowrap;
+}
+
+.teamBtn {
+    color: white !important;
+    background-color: #1d3557 !important;
+    font-size:30px
+}
+
+.actionBtn {
+    border: 1px solid #1d3557 !important;
+    color: #1d3557 !important
+}
+
+.list-group {
+    border:1px solid #1d3557 !important;
+    max-height: 450px;
+    overflow-y: scroll;
 }

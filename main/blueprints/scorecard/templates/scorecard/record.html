@@ -8,26 +8,69 @@
 
 <div class="container-fluid px-0 mainContainer">
     <div class="container teamBtnContainer pt-3">
-        <button class="btn btn-outline-primary main-font mx-2">Home</button>
-        <button class="btn btn-outline-primary main-font mx-2">Away</button>
+        <div class="row w-100">
+            <div class="col">
+                <div class="container-fluid teamStatContainer">
+                    <h6>Home Team Stats</h6>
+                </div>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-primary form-control main-font h-100 teamBtn">Home</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-primary form-control main-font h-100 teamBtn">Away</button>
+            </div>
+            <div class="col">
+                <div class="container-fluid teamStatContainer">
+                    <h6>Away Team Stats</h6>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container formContainer mt-2">
-        <div class="row">
+        <div class="row w-100">
             <div class="col">
-                <button class="btn btn-outline-primary main-font">Shot</button>
+                <button class="btn btn-outline-primary main-font form-control actionBtn">Shot</button>
             </div>
             <div class="col">
-                <button class="btn btn-outline-primary main-font">Shot Blocked</button>
+                <button class="btn btn-outline-primary main-font form-control actionBtn">Shot Blocked</button>
             </div>
             <div class="col">
-                <button class="btn btn-outline-primary main-font">Foul</button>
+                <button class="btn btn-outline-primary main-font form-control actionBtn">Foul</button>
             </div>
             <div class="col">
-                <button class="btn btn-outline-primary main-font">Card</button>
+                <button class="btn btn-outline-primary main-font form-control actionBtn">Card</button>
             </div>           
         </div>
-        <div class="container-fluid">
-            Test
+        <div class="container-fluid actionBox shotBox">
+            <div class="row pt-2">
+                <div class="col-5">
+                    <ul class="list-group">
+                        {% for n in range(12) %}
+                        <li class="list-group-item">
+                            Player {{n + 1}}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col">
+                    <div class="container-fluid">
+                        <h4 class="text-center">Outcome</h4>
+                        <div class="btn-group w-100" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-outline-success">Successful</button>
+                            <button type="button" class="btn btn-outline-danger">Failed</button>
+                            <button type="button" class="btn btn-outline-warning">Foul</button>
+                          </div>
+                    </div>
+                    <div class="container-fluid pt-2">
+                        <h4 class="text-center">Game Time</h4>
+                        <input type="time" class="form-control">
+                    </div>
+                    <div class="container-fluid pt-5">
+                        <button class="btn btn-success form-control">Submit Entry</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
