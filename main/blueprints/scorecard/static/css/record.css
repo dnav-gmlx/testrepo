@@ -6,17 +6,22 @@
     flex-direction: column;
     align-items: center;
     padding-top: 1rem;
-    height: 85%;
+    height: 90%;
+    background-color: #1a8f1a
 }
 
 .teamBtnContainer {
-    height: 15%;
+    height: 10%;
     display: flex;
     justify-content: space-evenly;
 }
 
 .btn {
     white-space: nowrap;
+}
+
+.btn-primary{
+    background-color: #1d3557;
 }
 
 .teamBtn {
@@ -34,4 +39,111 @@
     border:1px solid #1d3557 !important;
     max-height: 450px;
     overflow-y: scroll;
+}
+
+.statContainer {
+    text-align: center;
+    border: 2px solid #1d3557;
+}
+
+.statLabelCol {
+    border: 1px solid #1d3557;
+}
+
+.metricLabel {
+    border-bottom: 1px solid #1d3557;
+    font-weight: bold;
+    color: #1d3557;
+}
+
+.metricBox {
+    border-top: 1px solid #1d3557;
+    color: #1d3557;
+}
+
+
+/* 
+styles for lax field graphic */
+
+
+
+#midField{
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+}
+.wingTop{
+    border-bottom: 2px solid white;
+}
+.wingBottom {
+    border-top: 2px solid white;
+}
+
+.endFieldDiv{
+    height: 80%;
+}
+
+.wingDiv {
+    height: 10%;
+}
+
+
+.goalieCol, .defenseCol, .attackCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.goalieCol, .defenseCol {
+    justify-content: space-evenly;
+}
+
+.attackCol {
+    justify-content: space-around;
+}
+
+.midFieldCol{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* 
+player graphics */
+
+.playerBox {
+    width: 70px;
+    background-color: white;
+    border-radius: 40px;
+}
+
+.playerLabel{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    padding: .5rem .5rem;
+}
+
+
+/* modal styling */
+
+.modal-dialog {
+    max-width: 700px;
+}
+
+.menuCard {
+    height: 160px;
+    border: 1px solid #1d3557;
+}
+
+.menuCard > .card-body {
+    padding: 0;
+}
+
+.menuHeader {
+    background: #22344e;
+    color: white;
+    text-align: center;
+    margin: 0;
 }

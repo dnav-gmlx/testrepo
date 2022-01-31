@@ -5,75 +5,286 @@
 {% endblock %}
 
 {% block content %}
+<div class="modal" id='playerMenu'>
+    <div class="modal-dialog h-50 modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content h-100">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Player Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="card menuCard" id="shotCard">
+                <div class="card-body">
+                    <h4 class="w-100 menuHeader">Shot Taken</h4>
+                    <div class="container-fluid d-flex flex-column p-1">
+                        <button class="btn btn-success" onclick="addGoal()">Shot Successful - Goal</button>
+                        <button class="btn btn-danger my-1">Shot Unsuccessful - Blocked</button>
+                        <button class="btn btn-warning">Shot Unsuccessful - Missed</button>
+                    </div>
+                </div>
+              </div>
+              <div class="card menuCard my-1" id="fouldCard">
+                <div class="card-body">
+                    <h4 class="w-100 menuHeader">Record Foul</h4>
+                    <div class="container-fluid">
+                        <div class="input-group mt-3">
+                            <select name="fouls" id="fouls" class='form-control'>
+                                <option value="Personal Foul">Personal Foul</option>
+                                <option value="Crease Violation">Crease Violation</option>
+                                <option value="Thumbing">Thumbing</option>
+                                <option value="Offside">Offside</option>
+                            </select>
+                            <span class="input-group-text btn btn-primary" id="foulSaveBtn">Save</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card menuCard" id="subCard">
+                <div class="card-body">
+                    <h4 class="w-100 menuHeader">Substitute Player</h4>
+                    <div class="container-fluid">
+                        <div class="input-group mt-3">
+                            <select name="sub" id="sub" class='form-control'>
+                                <option value="Select Player">Select Player</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                          </select>
+                          <span class="input-group-text btn-primary" id="subSaveBtn" onclick='changePlayer()'>Save</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary form-control" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+</div>
+
 
 <div class="container-fluid px-0 mainContainer">
-    <div class="container teamBtnContainer pt-3">
+    <div class="container-fluid w-100 teamBtnContainer mx-0 px-0">
         <div class="row w-100">
-            <div class="col">
-                <div class="container-fluid teamStatContainer">
-                    <h6>Home Team Stats</h6>
+            <div class="col statContainer mx-0 px-0">
+                <div class="container-fluid teamStatContainer px-0">
+                    <div class="row row m-0 p-0 w-100">
+                        <div class="col statLabelCol">
+                            <h6>Home Team</h6>
+                            <input type="color" name="homeColor" id="homeColor" value='#1d3557' onchange="setColors()">
+                        </div>
+                        <div class="col statLabelCol">
+                            <div class="metricLabel">Goals Scored</div>
+                            <div class="metricBox" id='homeGoals'>0</div>
+                        </div>
+                        <div class="col statLabelCol">
+                            <div class="metricLabel">Fouls</div>
+                            <div class="metricBox">0</div>    
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <button class="btn btn-outline-primary form-control main-font h-100 teamBtn">Home</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary form-control main-font h-100 teamBtn">Away</button>
-            </div>
-            <div class="col">
-                <div class="container-fluid teamStatContainer">
-                    <h6>Away Team Stats</h6>
+            <div class="col statContainer mx-0 px-0">
+                <div class="container-fluid teamStatContainer px-0">
+                    <div class="row row m-0 p-0 w-100">
+                        <div class="col statLabelCol">
+                            <h6>Away Team</h6>
+                            <input type="color" name="awayColor" id="awayColor" value='#e63946' onchange="setColors()">
+                        </div>
+                        <div class="col statLabelCol">
+                            <div class="metricLabel">Goals Scored</div>
+                            <div class="metricBox" id='awayGoals'>0</div>
+                        </div>
+                        <div class="col statLabelCol">
+                            <div class="metricLabel">Fouls</div>
+                            <div class="metricBox">0</div>    
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container formContainer mt-2">
-        <div class="row w-100">
-            <div class="col">
-                <button class="btn btn-outline-primary main-font form-control actionBtn">Shot</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary main-font form-control actionBtn">Shot Blocked</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary main-font form-control actionBtn">Foul</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary main-font form-control actionBtn">Card</button>
-            </div>           
-        </div>
-        <div class="container-fluid actionBox shotBox">
-            <div class="row pt-2">
-                <div class="col-5">
-                    <ul class="list-group">
-                        {% for n in range(12) %}
-                        <li class="list-group-item">
-                            Player {{n + 1}}
-                        </li>
-                        {% endfor %}
-                    </ul>
+    <div class="container-fluid formContainer p-0 mx-0 w-100">
+        <div class="row mx-0 w-100 h-100" id='fieldRow'>
+            <div class="col px-0">
+                <div class="wingDiv wingTop">
+
                 </div>
-                <div class="col">
-                    <div class="container-fluid">
-                        <h4 class="text-center">Outcome</h4>
-                        <div class="btn-group w-100" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-outline-success">Successful</button>
-                            <button type="button" class="btn btn-outline-danger">Failed</button>
-                            <button type="button" class="btn btn-outline-warning">Foul</button>
-                          </div>
+                <div class= 'endFieldDiv'>
+                    <div class="row mx-0 w-100 h-100">
+                        <div class="col-4 goalieCol" id='homeGoalie'>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 defenseCol" id='homeDefense'>
+                            <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 attackCol" id='awayAttack'>
+                            <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="container-fluid pt-2">
-                        <h4 class="text-center">Game Time</h4>
-                        <input type="time" class="form-control">
+                </div>
+                <div class="wingDiv wingBottom">
+                    
+                </div>
+            </div>
+            <div class="col-3 px-0" id='midField'>
+                <div class="row px-0 h-100 w-100">
+                    <div class="col-6 midFieldCol" id='homeMid'>
+                        <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                            <div class="card-body playerLabel">
+                                1
+                            </div>
+                        </div>
+                        <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                            <div class="card-body playerLabel">
+                                1
+                            </div>
+                        </div>
+                        <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                            <div class="card-body playerLabel">
+                                1
+                            </div>
+                        </div>
                     </div>
-                    <div class="container-fluid pt-5">
-                        <button class="btn btn-success form-control">Submit Entry</button>
+                    <div class="col-6 midFieldCol" id='awayMid'>
+                        <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                            <div class="card-body playerLabel">
+                                1
+                            </div>
+                        </div>
+                        <div class="card playerBox"  data-bs-target='#playerMenu' data-bs-toggle="modal">
+                            <div class="card-body playerLabel">
+                                1
+                            </div>
+                        </div>
+                        <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                            <div class="card-body playerLabel">
+                                1
+                            </div>
+                        </div>                       
                     </div>
+                </div>
+            </div>
+            <div class="col px-0">
+                <div class="wingDiv wingTop">
+
+                </div>
+                <div class= 'endFieldDiv'>
+                    <div class="row mx-0 w-100 h-100">
+                        <div class="col-4 attackCol" id='homeAttack'>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 defenseCol" id='awayDefense'>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 goalieCol" id='awayGoalie'>
+                            <div class="card playerBox" data-bs-target='#playerMenu' data-bs-toggle="modal">
+                                <div class="card-body playerLabel">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wingDiv wingBottom">
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="{{ url_for('scorecard.static', filename='js/record.js') }}"></script>
 {% endblock %}
 
